@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>बोलो पढ़ो  Bolo Padho — Meet Didi</title>
+<meta name="description" content="Bolo Padho — Meet Didi, a patient AI reading coach for children in classes 1 to 5, built with Sarvam Voice Agents." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Mukta:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --cream:#FFF7EC;
+    --cream-2:#FCEDD9;
+    --saffron:#E8590C;
+    --saffron-dark:#B8430A;
+    --saffron-soft:#FFE1C6;
+    --saffron-tint:#FFF0DF;
+    --ink:#2A2018;
+    --ink-soft:#5C4B3E;
+    --grey:#ECE8E1;
+    --card:#FFFFFF;
+    --shadow:0 10px 30px rgba(124,74,20,.10);
+    --shadow-lg:0 18px 46px rgba(124,74,20,.16);
+    --radius:22px;
+    --radius-sm:14px;
+  }
+
+  *{box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Mukta',system-ui,-apple-system,'Segoe UI',sans-serif;
+    font-size:18px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,h4{
+    font-family:'Baloo 2','Mukta',system-ui,sans-serif;
+    line-height:1.2;
+    margin:0 0 .5em;
+    letter-spacing:.2px;
+  }
+
+  p{margin:0 0 1em;}
+
+  .wrap{
+    width:100%;
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 20px;
+  }
+
+  section{
+    padding:64px 0;
+  }
+
+  .section-head{
+    max-width:760px;
+    margin:0 auto 36px;
+    text-align:center;
+  }
+
+  .eyebrow{
+    display:inline-block;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    font-size:.82rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--saffron-dark);
+    background:var(--saffron-tint);
+    border:1px solid var(--saffron-soft);
+    border-radius:999px;
+    padding:6px 16px;
+    margin-bottom:16px;
+  }
+
+  h2{
+    font-size:clamp(1.7rem,4vw,2.4rem);
+    color:var(--ink);
+  }
+
+  .lead{
+    font-size:1.05rem;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:76px 0 64px;
+    background:
+      radial-gradient(1100px 460px at 50% -140px, var(--saffron-soft), transparent 70%),
+      var(--cream);
+    overflow:hidden;
+  }
+
+  .hero-inner{
+    max-width:820px;
+    margin:0 auto;
+    text-align:center;
+  }
+
+  .hero h1{
+    font-size:clamp(2.3rem,7.5vw,4rem);
+    font-weight:800;
+    color:var(--ink);
+    margin-bottom:.25em;
+  }
+
+  .hero h1 .hi{
+    display:block;
+    color:var(--saffron);
+  }
+
+  .hero h1 .en{
+    display:block;
+    font-size:.62em;
+    color:var(--ink);
+    font-weight:700;
+  }
+
+  .hero .subtitle{
+    font-size:clamp(1.05rem,2.6vw,1.3rem);
+    color:var(--ink-soft);
+    max-width:620px;
+    margin:0 auto 24px;
+  }
+
+  .built-line{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:600;
+    font-size:.95rem;
+    color:var(--saffron-dark);
+    background:var(--card);
+    border:1px solid var(--saffron-soft);
+    border-radius:999px;
+    padding:10px 22px;
+    box-shadow:var(--shadow);
+  }
+
+  .built-line .dot{
+    width:10px;height:10px;border-radius:50%;
+    background:var(--saffron);
+    box-shadow:0 0 0 4px var(--saffron-tint);
+    flex:none;
+  }
+
+  /* ---------- PROBLEM ---------- */
+  .problem{
+    background:var(--cream-2);
+  }
+
+  .problem-card{
+    max-width:820px;
+    margin:0 auto;
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:38px 34px;
+    box-shadow:var(--shadow);
+    border-top:5px solid var(--saffron);
+    text-align:center;
+  }
+
+  .problem-card p{
+    font-size:1.12rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+
+  .problem-card strong{
+    color:var(--ink);
+    font-weight:600;
+  }
+
+  .problem-card .big-line{
+    font-family:'Baloo 2',sans-serif;
+    font-size:clamp(1.15rem,3vw,1.5rem);
+    color:var(--saffron-dark);
+    font-weight:700;
+    display:block;
+    margin-top:18px;
+  }
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:24px;
+  }
+
+  .step{
+    position:relative;
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:34px 26px 28px;
+    box-shadow:var(--shadow);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+
+  .step:hover{
+    transform:translateY(-4px);
+    box-shadow:var(--shadow-lg);
+  }
+
+  .step-num{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:48px;height:48px;
+    border-radius:50%;
+    background:var(--saffron);
+    color:#fff;
+    font-family:'Baloo 2',sans-serif;
+    font-size:1.35rem;
+    font-weight:800;
+    box-shadow:0 8px 18px rgba(232,89,12,.32);
+    margin-bottom:16px;
+  }
+
+  .step h3{
+    font-size:1.18rem;
+    margin-bottom:.35em;
+  }
+
+  .step p{
+    color:var(--ink-soft);
+    font-size:.98rem;
+    margin:0;
+  }
+
+  /* ---------- FEATURES ---------- */
+  .features{background:var(--cream-2);}
+
+  .feature-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
+    gap:18px;
+  }
+
+  .feature{
+    background:var(--card);
+    border-radius:var(--radius-sm);
+    padding:22px 20px;
+    box-shadow:var(--shadow);
+    border:1px solid rgba(232,89,12,.08);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+
+  .feature:hover{
+    transform:translateY(-3px);
+    box-shadow:var(--shadow-lg);
+  }
+
+  .feature .emoji{
+    font-size:1.7rem;
+    line-height:1;
+    display:block;
+    margin-bottom:10px;
+  }
+
+  .feature h4{
+    font-size:1.02rem;
+    margin-bottom:.3em;
+    color:var(--ink);
+  }
+
+  .feature p{
+    font-size:.9rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+
+  /* ---------- LANGUAGES ---------- */
+  .langs .pill-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    justify-content:center;
+    max-width:720px;
+    margin:0 auto;
+  }
+
+  .pill{
+    font-family:'Baloo 2',sans-serif;
+    font-weight:600;
+    font-size:1.05rem;
+    color:var(--saffron-dark);
+    background:var(--saffron-tint);
+    border:1.5px solid var(--saffron-soft);
+    border-radius:999px;
+    padding:12px 28px;
+    box-shadow:0 6px 16px rgba(124,74,20,.08);
+    transition:background .16s ease, transform .16s ease;
+  }
+
+  .pill:hover{
+    background:var(--saffron-soft);
+    transform:translateY(-2px);
+  }
+
+  /* ---------- CONVERSATION ---------- */
+  .convo{background:var(--cream-2);}
+
+  .chat{
+    max-width:720px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+
+  .row{
+    display:flex;
+    width:100%;
+  }
+
+  .row.didi{justify-content:flex-start;}
+  .row.child{justify-content:flex-end;}
+
+  .bubble{
+    position:relative;
+    max-width:80%;
+    padding:16px 20px;
+    font-size:1rem;
+    box-shadow:var(--shadow);
+    border-radius:20px;
+  }
+
+  .bubble .who{
+    display:block;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    font-size:.78rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    margin-bottom:6px;
+    opacity:.85;
+  }
+
+  .row.didi .bubble{
+    background:var(--saffron-soft);
+    color:#4A2A0E;
+    border-bottom-left-radius:6px;
+  }
+
+  .row.didi .bubble .who{color:var(--saffron-dark);}
+
+  .row.child .bubble{
+    background:var(--grey);
+    color:var(--ink);
+    border-bottom-right-radius:6px;
+  }
+
+  .row.child .bubble .who{color:var(--ink-soft);}
+
+  /* ---------- WHY IT MATTERS ---------- */
+  .why-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:22px;
+  }
+
+  .why{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:28px 24px;
+    box-shadow:var(--shadow);
+    border-left:5px solid var(--saffron);
+  }
+
+  .why h3{
+    font-size:1.08rem;
+    margin-bottom:.35em;
+  }
+
+  .why p{
+    font-size:.95rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+
+  /* ---------- BUILT WITH ---------- */
+  .built{background:var(--cream-2);}
+
+  .built-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:20px;
+  }
+
+  .built-card{
+    background:var(--card);
+    border-radius:var(--radius-sm);
+    padding:26px 22px;
+    box-shadow:var(--shadow);
+    text-align:center;
+  }
+
+  .built-card .emoji{
+    font-size:1.9rem;
+    display:block;
+    margin-bottom:10px;
+  }
+
+  .built-card h4{
+    font-size:1.05rem;
+    margin-bottom:.35em;
+  }
+
+  .built-card p{
+    font-size:.9rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink);
+    color:#F4E6D7;
+    padding:40px 20px;
+    text-align:center;
+  }
+
+  footer p{
+    margin:0;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:600;
+    font-size:1rem;
+    letter-spacing:.02em;
+  }
+
+  footer .heart{color:var(--saffron);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:640px){
+    body{font-size:17px;}
+    section{padding:48px 0;}
+    .hero{padding:56px 0 48px;}
+    .problem-card{padding:28px 22px;}
+    .bubble{max-width:88%;}
+    .pill{font-size:.98rem;padding:10px 22px;}
+  }
+</style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap hero-inner">
+      <h1>
+        <span class="hi">बोलो पढ़ो</span>
+        <span class="en">Bolo Padho</span>
+      </h1>
+      <p class="subtitle">Meet Didi — a patient AI reading coach who listens to every child read aloud, in their own language.</p>
+      <div class="built-line"><span class="dot"></span> Built with Sarvam Voice Agents</div>
+    </div>
+  </header>
+
+  <!-- THE PROBLEM -->
+  <section class="problem">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">The problem</span>
+        <h2>One teacher. Forty children. No time to listen.</h2>
+      </div>
+      <div class="problem-card">
+        <p>A single teacher cannot sit with forty children and hear each one read aloud — so reading practice is the first thing to slip. <strong>Children who fall behind in reading fall behind in everything.</strong></p>
+        <span class="big-line">Every child deserves to be heard, one sentence at a time.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2>Three gentle steps with Didi</h2>
+        <p class="lead">No app to install. No reading screen. Just a voice call.</p>
+      </div>
+
+      <div class="steps">
+        <article class="step">
+          <span class="step-num">1</span>
+          <h3>Didi says hello</h3>
+          <p>Didi greets the child, learns their name and class, and reads a short story aloud slowly as a model — so the child hears what good reading sounds like.</p>
+        </article>
+
+        <article class="step">
+          <span class="step-num">2</span>
+          <h3>The child reads back</h3>
+          <p>The child reads it back one sentence at a time. Didi catches every skipped, changed or mispronounced word, praises first, then teaches the word syllable by syllable.</p>
+        </article>
+
+        <article class="step">
+          <span class="step-num">3</span>
+          <h3>Stars and a note</h3>
+          <p>Didi asks two simple comprehension questions, gives stars and up to 3 practice words, and leaves a one-line note for the parent or teacher about the child's error pattern.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Features</span>
+        <h2>Kind by design, clever by default</h2>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature">
+          <span class="emoji">🤗</span>
+          <h4>Never says “wrong”</h4>
+          <p>Didi says “almost!” and moves forward — no scolding, no shame, ever.</p>
+        </div>
+        <div class="feature">
+          <span class="emoji">🧩</span>
+          <h4>Adapts to the child</h4>
+          <p>Slows to half-sentences when the child struggles, and offers a bonus harder sentence when they read perfectly.</p>
+        </div>
+        <div class="feature">
+          <span class="emoji">⭐</span>
+          <h4>Star rewards</h4>
+          <p>Every bit of effort earns stars, so children want to come back tomorrow.</p>
+        </div>
+        <div class="feature">
+          <span class="emoji">🔁</span>
+          <h4>Repeats on request</h4>
+          <p>“Didi, again?” — and the sentence is read once more, patiently.</p>
+        </div>
+        <div class="feature">
+          <span class="emoji">🌐</span>
+          <h4>Switches language mid-call</h4>
+          <p>Move between Hindi, English and more without restarting the conversation.</p>
+        </div>
+        <div class="feature">
+          <span class="emoji">🛡️</span>
+          <h4>Child-safety guardrail</h4>
+          <p>If a child says they are hurt or scared, Didi stops gently and flags “needs teacher attention”.</p>
+        </div>
+        <div class="feature">
+          <span class="emoji">📞</span>
+          <h4>Parent summary</h4>
+          <p>If an adult comes on the line, Didi gives a clear two-sentence summary of the session.</p>
+        </div>
+        <div class="feature">
+          <span class="emoji">📝</span>
+          <h4>Post-call record</h4>
+          <p>Outcome, practice words and a teacher note are saved after every call.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LANGUAGES -->
+  <section class="langs">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Languages</span>
+        <h2>Reads and speaks with the child's own language</h2>
+      </div>
+      <div class="pill-row">
+        <span class="pill">हिन्दी</span>
+        <span class="pill">English</span>
+        <span class="pill">मराठी</span>
+        <span class="pill">தமிழ்</span>
+        <span class="pill">తెలుగు</span>
+        <span class="pill">বাংলা</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAMPLE CONVERSATION -->
+  <section class="convo">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Sample conversation</span>
+        <h2>What a session sounds like</h2>
+      </div>
+
+      <div class="chat">
+        <div class="row didi">
+          <div class="bubble">
+            <span class="who">Didi</span>
+            Let me read it first, then it will be your turn. Ravi has a red kite.
+          </div>
+        </div>
+
+        <div class="row child">
+          <div class="bubble">
+            <span class="who">Child</span>
+            Ravi has a kite.
+          </div>
+        </div>
+
+        <div class="row didi">
+          <div class="bubble">
+            <span class="who">Didi</span>
+            You did a great job starting! But you missed one word. It is “red”. Try again: Ravi has a red kite.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY IT MATTERS -->
+  <section class="why-matters">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Why it matters</span>
+        <h2>Reading practice that reaches everyone</h2>
+      </div>
+
+      <div class="why-grid">
+        <div class="why">
+          <h3>Works on any phone</h3>
+          <p>Just a simple voice call — no app, no data-heavy screen, no smartphone required for the coaching.</p>
+        </div>
+        <div class="why">
+          <h3>Scales to a whole class</h3>
+          <p>Every child gets their own turn to read aloud, even when the teacher has forty of them.</p>
+        </div>
+        <div class="why">
+          <h3>Gives teachers data</h3>
+          <p>Clear records show who needs help and with which sounds, so teaching time goes where it counts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUILT WITH -->
+  <section class="built">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Built with</span>
+        <h2>Powered end-to-end by Sarvam</h2>
+      </div>
+
+      <div class="built-grid">
+        <div class="built-card">
+          <span class="emoji">🎙️</span>
+          <h4>Sarvam Voice Agents</h4>
+          <p>The Didi agent is built with Genie through prompts — conversation, teaching and safety logic all in one.</p>
+        </div>
+        <div class="built-card">
+          <span class="emoji">💻</span>
+          <h4>Sarvam Cowork</h4>
+          <p>This very website was built with Sarvam Cowork.</p>
+        </div>
+        <div class="built-card">
+          <span class="emoji">🗣️</span>
+          <h4>Indian-language speech</h4>
+          <p>Speech recognition and natural voices from Sarvam, tuned for Indian languages and accents.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Bolo Padho <span class="heart"></span> Made at the hackathon <span class="heart"></span> October 2026</p>
+  </footer>
+
+  <!-- PASTE WIDGET HERE -->
+</body>
+</html>
